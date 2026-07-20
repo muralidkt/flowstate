@@ -6,8 +6,8 @@
 
 - [x] **T0.1 Repo bootstrap** — README stub, `.gitignore`, initial commit of docs; GitHub repo (`muralidkt/flowstate`, pre-created) wired and pushed.
   *Accept: `git push` works; docs visible on GitHub. Note: repo visibility currently public — decision pending (recommend private).*
-- [ ] **T0.2 Dev tooling (runtime)** — uv project in `runtime/`, ruff + mypy + pytest wired, root `justfile` (`check`/`test`/`dev`).
-  *Accept: `just check` passes on an empty skeleton.*
+- [x] **T0.2 Dev tooling (runtime)** — uv project in `runtime/`, ruff + mypy (strict) + pytest wired, root `justfile` (`check`/`fmt`/`test`/`dev`/`smoke`/`deploy`).
+  *Accept: `just check` passes on an empty skeleton. ✓ (format+lint+types+1 test green)*
 - [ ] **T0.3 Runtime skeleton** — FastAPI app factory, `/healthz`, `pydantic-settings` config, structured logging.
   *Accept: `just dev` serves `/healthz`; contract test green.*
 - [ ] **T0.4 Agent core** — `AgentBackend` interface + real SDK backend (`ClaudeSDKClient`, options per PLAN §8: `setting_sources`, `include_partial_messages`, `stderr` cb), drain-fast event queue, SDK→wire event translator, SSE `POST /chat`.
