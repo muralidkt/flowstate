@@ -4,8 +4,8 @@
 
 ## Phase 0 — Core loop, local
 
-- [~] **T0.1 Repo bootstrap** — README stub, `.gitignore`, initial commit of docs; create private GitHub repo and push.
-  *Accept: `git push` works; repo private; docs visible on GitHub.*
+- [x] **T0.1 Repo bootstrap** — README stub, `.gitignore`, initial commit of docs; GitHub repo (`muralidkt/flowstate`, pre-created) wired and pushed.
+  *Accept: `git push` works; docs visible on GitHub. Note: repo visibility currently public — decision pending (recommend private).*
 - [ ] **T0.2 Dev tooling (runtime)** — uv project in `runtime/`, ruff + mypy + pytest wired, root `justfile` (`check`/`test`/`dev`).
   *Accept: `just check` passes on an empty skeleton.*
 - [ ] **T0.3 Runtime skeleton** — FastAPI app factory, `/healthz`, `pydantic-settings` config, structured logging.
