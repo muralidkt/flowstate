@@ -1,0 +1,38 @@
+# --- Security-critical: local workspace holds real personal data (statements, wiki) ---
+.data/
+*.db
+*.sqlite*
+
+# Secrets / env
+.env
+.env.*
+!.env.example
+*.pem
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+*.egg-info/
+
+# Node / Worker
+node_modules/
+.wrangler/
+.dev.vars
+
+# Terraform (state must never be committed; lockfile IS committed)
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!example.tfvars
+crash.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/settings.json
