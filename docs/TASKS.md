@@ -8,8 +8,8 @@
   *Accept: `git push` works; docs visible on GitHub. Note: repo visibility currently public — decision pending (recommend private).*
 - [x] **T0.2 Dev tooling (runtime)** — uv project in `runtime/`, ruff + mypy (strict) + pytest wired, root `justfile` (`check`/`fmt`/`test`/`dev`/`smoke`/`deploy`).
   *Accept: `just check` passes on an empty skeleton. ✓ (format+lint+types+1 test green)*
-- [ ] **T0.3 Runtime skeleton** — FastAPI app factory, `/healthz`, `pydantic-settings` config, structured logging.
-  *Accept: `just dev` serves `/healthz`; contract test green.*
+- [x] **T0.3 Runtime skeleton** — FastAPI app factory, `/healthz`, `pydantic-settings` config (`FLOWSTATE_*` env prefix), structured logging (console local / JSON prod).
+  *Accept: `just dev` serves `/healthz`; contract test green. ✓ (live curl verified; 4 tests)*
 - [ ] **T0.4 Agent core** — `AgentBackend` interface + real SDK backend (`ClaudeSDKClient`, options per PLAN §8: `setting_sources`, `include_partial_messages`, `stderr` cb), drain-fast event queue, SDK→wire event translator, SSE `POST /chat`.
   *Accept: unit tests for translator; manual real-key chat streams locally.*
 - [ ] **T0.5 Persona + sessions** — `runtime/.claude/CLAUDE.md` persona, `./.data` workspace bootstrap, session continuity (session-id state file, JSONL copy at turn end, resume-only-if-exists guard).
