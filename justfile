@@ -22,9 +22,9 @@ test:
 dev:
     cd runtime && uv run uvicorn flowstate.app.main:create_app --factory --reload
 
-# Manual real-key smoke conversation (arrives with T0.4)
-smoke:
-    @echo "smoke: not yet implemented — lands with T0.4 (agent core)"
+# Manual real-key smoke conversation (needs local Claude login or ANTHROPIC_API_KEY)
+smoke *args:
+    cd runtime && uv run python scripts/smoke.py {{args}}
 
 # Deploy (normally CI's job; arrives with T1.5)
 deploy:

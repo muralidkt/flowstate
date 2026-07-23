@@ -10,8 +10,8 @@
   *Accept: `just check` passes on an empty skeleton. ✓ (format+lint+types+1 test green)*
 - [x] **T0.3 Runtime skeleton** — FastAPI app factory, `/healthz`, `pydantic-settings` config (`FLOWSTATE_*` env prefix), structured logging (console local / JSON prod).
   *Accept: `just dev` serves `/healthz`; contract test green. ✓ (live curl verified; 4 tests)*
-- [ ] **T0.4 Agent core** — `AgentBackend` interface + real SDK backend (`ClaudeSDKClient`, options per PLAN §8: `setting_sources`, `include_partial_messages`, `stderr` cb), drain-fast event queue, SDK→wire event translator, SSE `POST /chat`.
-  *Accept: unit tests for translator; manual real-key chat streams locally.*
+- [x] **T0.4 Agent core** — `AgentBackend` protocol + SDK backend (`ClaudeSDKClient`, hardening options per PLAN §8), drain-fast event queue, SDK→wire translator, SSE `POST /chat`, `just smoke`.
+  *Accept: unit tests for translator; manual real-key chat streams locally. ✓ (16 tests; live smoke: streamed text + Glob tool calls, $0.74/turn — cost work lands in T0.5/T0.7)*
 - [ ] **T0.5 Persona + sessions** — `runtime/.claude/CLAUDE.md` persona, `./.data` workspace bootstrap, session continuity (session-id state file, JSONL copy at turn end, resume-only-if-exists guard).
   *Accept: two `just dev` restarts continue one conversation; guard unit-tested.*
 - [ ] **T0.6 Fake backend + contract tests** — deterministic LLM-free `AgentBackend`; contract tests for `/chat` (stream shape, multi-turn, error turn).
