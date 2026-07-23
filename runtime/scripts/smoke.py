@@ -11,13 +11,16 @@ import sys
 from flowstate.config import get_settings
 from flowstate.core import events
 from flowstate.core.agent import SdkAgentBackend
+from flowstate.core.workspace import Workspace
 
 
 async def main() -> int:
     prompt = " ".join(sys.argv[1:]) or (
         "In one sentence: which files exist in your current directory? Use your tools."
     )
-    backend = SdkAgentBackend(get_settings())
+    settings = get_settings()
+    workspace = Workspace(settings.workspace_dir).ensure()
+    backend = SdkAgentBackend(settings, workspace)
     async for event in backend.run_turn(prompt):
         match event:
             case events.TextDelta(text=text):

@@ -135,7 +135,7 @@ Conventions (enforced via CLAUDE.md): consult the wiki before answering personal
 
 - **Cold start:** restore workspace + SDK session store from R2 (seconds).
 - **After every turn:** checkpoint changed small state (finance.db, wiki, sessions, audit) to R2. A recycled container loses nothing that completed.
-- **Session continuity:** copy the SDK's session JSONL (`~/.claude/projects/<encoded-cwd>/<id>.jsonl`) to durable storage at turn end, restore before resume; keep the "current session id per conversation" as a small state file. Guard: pass `resume` **only if the JSONL exists locally**; persist under the **new** session id reported at turn end (the SDK may rotate ids).
+- **Session continuity:** pin `CLAUDE_CONFIG_DIR` inside the workspace whenever auth is self-contained (API key set / production), so the SDK's session JSONLs are durable by construction; with a local subscription login keep the CLI's own config dir — relocating it orphans the stored credentials ("Not logged in") — and honor an inherited `CLAUDE_CONFIG_DIR`. The "current session id per conversation" lives in a small state file. Guards: pass `resume` **only if the session file exists**; save the **new** session id reported at turn end (the SDK may rotate ids); every path handed to the CLI must be absolute (relative ones re-resolve against its cwd).
 - **Finance pipeline:** bill arrives (Telegram file or web upload) → R2 → `finance` subagent runs `ingest-statement` → SQLite rows with `source_doc` references → answers cite source documents.
 
 ## 7. Security model

@@ -12,8 +12,8 @@
   *Accept: `just dev` serves `/healthz`; contract test green. ✓ (live curl verified; 4 tests)*
 - [x] **T0.4 Agent core** — `AgentBackend` protocol + SDK backend (`ClaudeSDKClient`, hardening options per PLAN §8), drain-fast event queue, SDK→wire translator, SSE `POST /chat`, `just smoke`.
   *Accept: unit tests for translator; manual real-key chat streams locally. ✓ (16 tests; live smoke: streamed text + Glob tool calls, $0.74/turn — cost work lands in T0.5/T0.7)*
-- [ ] **T0.5 Persona + sessions** — `runtime/.claude/CLAUDE.md` persona, `./.data` workspace bootstrap, session continuity (session-id state file, JSONL copy at turn end, resume-only-if-exists guard).
-  *Accept: two `just dev` restarts continue one conversation; guard unit-tested.*
+- [x] **T0.5 Persona + sessions** — persona (`runtime/.claude/CLAUDE.md`, appended via `system_prompt` preset with `exclude_dynamic_sections` for cacheability), workspace bootstrap (`core/workspace.py`), session continuity via `CLAUDE_CONFIG_DIR` pinning + session pointer + resume-only-if-exists guard; auto-memory disabled.
+  *Accept: two restarts continue one conversation; guard unit-tested. ✓ (32 tests; live: fact taught in one process recalled in another, same session id, ~$0.03/turn resumed vs $0.74 cold)*
 - [ ] **T0.6 Fake backend + contract tests** — deterministic LLM-free `AgentBackend`; contract tests for `/chat` (stream shape, multi-turn, error turn).
   *Accept: full test suite green with no API key.*
 - [ ] **T0.7 Turn hardening** — setup + turn hard timeouts, ~1 s partial flush, per-turn cost capture → ledger JSONL.

@@ -12,7 +12,7 @@ class StubBackend:
     """Minimal stand-in; the full deterministic fake backend arrives with T0.6."""
 
     async def run_turn(
-        self, prompt: str, *, session_id: str | None = None
+        self, prompt: str, *, session_id: str | None = None, new_session: bool = False
     ) -> AsyncIterator[WireEvent]:
         yield events.TextDelta(text=f"echo:{prompt}")
         yield events.TurnEnd(session_id="s1", is_error=False)
